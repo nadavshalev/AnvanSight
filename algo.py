@@ -29,7 +29,9 @@ img = img / 255
 im_hight = img.shape[0]
 im_width = img.shape[1]
 # show image
-plt.imshow(img)
+fig=plt.imshow(img)
+plt.suptitle('FirstImg')
+plt.show()
 
 
 # ## correlation
@@ -44,7 +46,9 @@ im_red_norm = np.abs(im_red - im_red.mean())
 # correlation
 template = np.ones((im_red_norm.shape[1],1))
 cor_im = signal.correlate2d(im_red_norm, template, boundary='symm', mode='same')
-plt.imshow(cor_im);
+fig=plt.imshow(cor_im)
+plt.suptitle('CorImg')
+plt.show()
 
 
 # ## find line locations
@@ -92,10 +96,12 @@ for i in range(len(sweemers_width)):
             sweemers_hight[i] = j
             break
 #   just show graphs
-    plt.plot(sweemer_line)
-    plt.plot(sweemers_hight[i],sweemer_line[sweemers_hight[i]],"rx")
+    fig=plt.plot(sweemer_line)
+    #plt.suptitle('1')
+    #plt.show()
+    fig=plt.plot(sweemers_hight[i],sweemer_line[sweemers_hight[i]],"rx")
+    plt.suptitle('PlaceOnGrafh')
     plt.show()
-
 
 # ## plot result on picture
 
@@ -106,5 +112,7 @@ box_size = 6
 im_result = img
 for i in range(len(sweemers_width)):
     im_result[sweemers_hight[i]-box_size//2:sweemers_hight[i]+box_size//2, sweemers_width[i]-box_size//2:sweemers_width[i]+box_size//2,:] = 0
-plt.imshow(im_result)
+fig=plt.imshow(im_result)
+plt.suptitle('Result')
+plt.show()
 
