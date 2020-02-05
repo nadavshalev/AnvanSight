@@ -11,12 +11,11 @@ photo_name = './photos/img1.jpg'
 
 imcv = cv.imread(photo_name)
 
-tmp_img = np.array(cv.resize(imcv,(515,515)))
-print(tmp_img.shape)
+tmp_img = np.array(cv.resize(imcv,(536,512)))
 
-
-tmp_img = tmp_img[:,3:-3,:]
+tmp_img = tmp_img[:,12:-12,:]
 tmp_img = np.rot90(tmp_img)
+print(tmp_img.shape)
 
 # switch channels to make RGB
 img = np.zeros(tmp_img.shape)
@@ -61,7 +60,7 @@ cor_middle = cor_im[im_hight//2,:]
 # make graph
 plt.plot(cor_middle)
 #  find maximum peaks: distance between peaks
-line_locs, _ = signal.find_peaks(cor_middle, distance=35) #, threshold=None, prominence=None, width=None, wlen=None, rel_height=0.5, plateau_size=None)
+line_locs, _ = signal.find_peaks(cor_middle, distance=60) #, threshold=None, prominence=None, width=None, wlen=None, rel_height=0.5, plateau_size=None)
 # show red 'x' in maximums
 plt.plot(line_locs, cor_middle[line_locs], "rx")
 
@@ -92,7 +91,7 @@ for i in range(len(sweemers_width)):
 #     loop points in the line: where the sweemer start?
     for j in range(len(sweemer_line)):
 #         check minimum value of the sweemer
-        if sweemer_line[j] > 0.1:
+        if sweemer_line[j] > 0.2:
             sweemers_hight[i] = j
             break
 #   just show graphs
@@ -104,7 +103,7 @@ for i in range(len(sweemers_width)):
     plt.show()
 
 # ## plot result on picture
-
+print(sweemers_hight)
 # In[12]:
 
 
